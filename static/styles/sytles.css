@@ -1,0 +1,66 @@
+
+body {
+    font-family: 'System-ui', sans-serif;
+    background: rgb(2,0,36);
+    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 51%, rgba(0,212,255,1) 100%);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.data {
+    font-size: 2em;
+    margin: 20px 0;
+}
+
+.label {
+    font-size: 1.2em;
+    color: #555;
+}
+
+.value {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.footer {
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: #888;
+}
+
+.error {
+    color: red;
+}
+
+button {
+    background-color: #000036;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.2em;
+}
+
+button:hover {
+    background-color: #003366;
+}
