@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor de Temperatura y Humedad</title>
+    <style>
+        body {
+            font-family: 'System-ui', sans-serif;
+            background: rgb(2,0,36);
+            background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 51%, rgba(0,212,255,1) 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .data {
+            font-size: 2em;
+            margin: 20px 0;
+        }
+
+        .label {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .value {
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        .error {
+            color: red;
+        }
+
+        button {
+            background-color: #000036;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.2em;
+        }
+
+        button:hover {
+            background-color: #003366;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Monitor de Temperatura y Humedad</h1>
+        <div class="data">
+            <p class="label">Temperatura: <span id="temperature" class="value">Cargando...</span> °C</p>
+            <p class="label">Humedad: <span id="humidity" class="value">Cargando...</span> %</p>
+        </div>
+        <div id="errorMessage" class="error" style="display: none;">No se pudieron obtener los datos. Intenta nuevamente.</div>
+        <div class="footer">IoT - Practica Raspberry Pi 4</div>
+    </div>
+
+    <script>
+        // Esta función obtiene los datos de temperatura y humedad del servidor
+        function getData() {
+            fetch('/data')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.temperature !== undefined && data.humidity !== undefined) {
+                        // Actualizar los valores en la página
+                        document.getElementById('temperature').textContent = data.temperature;
+                        document.getElementById('humidity').textContent = data.humidity;
+                        document.getElementById('errorMessage').style.display = 'none';
+                    } else {
+                        document.getElementById('errorMessage').style.display = 'block';
+                    }
+                })
+                .catch(() => {
+                    document.getElementById('errorMessage').style.display = 'block';
+                });
+        }
+
+        setInterval(getData, 5000);  // Cada 5 segundos (5000 milisegundos)
+        window.onload = getData;
+    </script>
+</body>
+</html>
